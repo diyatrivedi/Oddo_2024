@@ -1,18 +1,4 @@
-// import './App.css';
-// import Login from './components/Login';
-// import SignIn from './components/SignIn';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>Hello</h1>
-//       <Login/>
-//       <SignIn/>
-//     </div>
-//   );
-// }
-
-// export default App;
 
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -23,15 +9,22 @@ import ExerciseDetail from './pages/ExerciseDetail';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Select from './components/Select';
+import Admin from './components/Admin';
+import Trainee from './components/Trainee';
+import User from './components/User';
+import Login from './components/Login';
 
 const App = () => (
   <Box width="400px" sx={{ width: { xl: '1488px' } }} m="auto">
-    <Navbar />
+    
     <Routes>
-      <Route path="/" element={<Home />} />
+    {/* <Navbar /> */}
+      <Route path='/' element={<Login/>}/>
+      <Route path="/home" element={<Home />} />
       <Route path="/exercise/:id" element={<ExerciseDetail />} />
     </Routes>
-    <Footer />
+    {/* <Footer /> */}
   </Box>
 );
 
