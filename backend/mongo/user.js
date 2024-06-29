@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    // required: true,
     min: 1,
   },
   password: {
@@ -23,24 +22,23 @@ const userSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    // enum: ["male", "female"],
-    // required: true,
+    enum: ["Male", "Female", "Other"],
+    required: true,
   },
   height: {
     type: Number,
-    // required: true,
   },
   weight: {
     type: Number,
-    // required: true,
   },
   fitnessGoal: {
     type: String,
-    // enum: ["weight loss", "muscle gain", "maintain weight"],
-    // required: true,
+    enum: ["Weight Loss", "Muscle Gain", "Maintain Fitness"],
+    required: true,
   },
   healthConditions: {
     type: [String],
   },
 });
+
 exports.User = mongoose.model("User", userSchema);

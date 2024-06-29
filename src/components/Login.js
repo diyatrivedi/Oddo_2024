@@ -77,7 +77,13 @@ const Login = () => {
           onChange={handleChange}
           placeholder="Enter your Password"
         />
+
+       
         <input type="submit" class="fadeIn fourth" value="Log In" />
+
+        <h2>New on Website?! Please Register!
+         <button onClick={()=>{Navigate('/register')}}>Register</button>
+         </h2>
       </form>
     </div>
   </div>
