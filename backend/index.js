@@ -1,13 +1,33 @@
-const express=require("express")
+require("dotenv").config();
+const path = require("path");
+const express = require("express");
+const cors = require("cors");
+const bcrypt = require("bcrypt");
+const userRouter = require("./routes/user");
+// const studentRouter = require("./routes/student");
+const mongoDB = require("./db");
+// mongoDB();
+// import userRouter from "./routes/user.js";
 
-const cors =require("cors")
-const app=express();
-PORT=5000;
+const PORT = process.env.PORT || 8000;
+console.log("my port", process.env.PORT);
 
-app.use(cors());
+const app = express();
+
+// __dirname = path.resolve();
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded());
+app.use(cors());
+app.use("/", require("./routes/user").router);
+// app.use("/", require("./routes/student").router);
 
-app.listen(PORT,()=>{
-    console.log(`server at ${PORT}`)
-})
+// app.use(express.static(path.join(__dirname, "/Placement-Board/build")));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "Placement-Board", "build", "index.html"));
+// });
+
+app.listen(5000, () => {
+  console.log(`BE started at port ${PORT}`);
+});

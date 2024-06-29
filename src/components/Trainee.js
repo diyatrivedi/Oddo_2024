@@ -1,9 +1,9 @@
-// import React from 'react'
+import React from 'react'
 
-// const Trainee = () => {
-//   return (
-//     <div>Trainee Login</div>
-//   )
-// }
+const Trainee = () => {
+  return (
+    <div>Trainee Login</div>
+  )
+}
 
-// export default Trainee
+export default Trainee

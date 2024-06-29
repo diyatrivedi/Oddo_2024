@@ -28,8 +28,16 @@ const Login = () => {
     alert(data1.message);
     console.log(data1.success);
     if (data1.success) {
-      if(email==="omtrivedioo3@gmail.com" && password ==="12345678" ){
+      console.log(data1.user.email)
+      console.log(data1.user.password)
+      console.log(data1.success)
+
+      
+      if(data1.user.email==="omtrivedioo3@gmail.com" && data1.user.password ==="12345678" ){
       Navigate("/admin");
+      }
+      else if(data1.user.email=="diya@gmail.com" && data1.user.password ==="12345678"){
+        Navigate("/trainee")
       }
       else 
       Navigate("/user");
@@ -42,18 +50,9 @@ const Login = () => {
   return (
     <div class="wrapper fadeInDown">
     <div id="formContent">
-      {/* <img
-        class="fadeIn second"
-        src="https://theacademicinsights.com/wp-content/uploads/2020/10/AICTE-logo.jpeg"
-        alt=""
-        width="335"
-        height="189"
-      ></img> */}
+   
       <br />
-      <h2 class="active"> User </h2>
-      <h2 class="inactive underlineHover" onClick={toAdmin}>
-        Admin{" "}
-      </h2>
+       <h2>Login</h2>
 
       <form onSubmit={loginUser}>
         <input
@@ -69,9 +68,10 @@ const Login = () => {
         <input
           id="password"
           class="fadeIn third"
-          name="login"
+          name="password"
+
           type="password"
-          
+         
           className="form-control"
           value={user.password}
           onChange={handleChange}

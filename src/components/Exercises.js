@@ -30,15 +30,14 @@
 //     };
 
 //     fetchExercisesData();
-//   }, [bodyPart]);
+//   }, [bodyPart, setExercises]);
 
 //   // Pagination
 //   const indexOfLastExercise = currentPage * exercisesPerPage;
 //   const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
-//   const currentExercises = exercises.slice(
-//     indexOfFirstExercise,
-//     indexOfLastExercise
-//   );
+//   const currentExercises = Array.isArray(exercises)
+//     ? exercises.slice(indexOfFirstExercise, indexOfLastExercise)
+//     : [];
 
 //   const paginate = (event, value) => {
 //     setCurrentPage(value);
@@ -69,7 +68,7 @@
 //         ))}
 //       </Stack>
 //       <Stack sx={{ mt: { lg: '114px', xs: '70px' } }} alignItems="center">
-//         {exercises.length > 9 && (
+//         {exercises.length > exercisesPerPage && (
 //           <Pagination
 //             color="standard"
 //             shape="rounded"
@@ -100,21 +99,29 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      let exercisesData = [];
+      try {
+        let exercisesData = [];
 
-      if (bodyPart === 'all') {
-        exercisesData = await fetchData(
-          'https://exercisedb.p.rapidapi.com/exercises',
-          exerciseOptions
-        );
-      } else {
-        exercisesData = await fetchData(
-          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
-          exerciseOptions
-        );
+        if (bodyPart === 'all') {
+          exercisesData = await fetchData(
+            'https://exercisedb.p.rapidapi.com/exercises',
+            exerciseOptions
+          );
+        } else {
+          exercisesData = await fetchData(
+            `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
+            exerciseOptions
+          );
+        }
+
+        if (Array.isArray(exercisesData)) {
+          setExercises(exercisesData);
+        } else {
+          console.error('Fetched data is not an array:', exercisesData);
+        }
+      } catch (error) {
+        console.error('Error fetching exercises data:', error);
       }
-
-      setExercises(exercisesData);
     };
 
     fetchExercisesData();
@@ -129,7 +136,6 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
   const paginate = (event, value) => {
     setCurrentPage(value);
-
     window.scrollTo({ top: 1800, behavior: 'smooth' });
   };
 
