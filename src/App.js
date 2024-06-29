@@ -16,6 +16,7 @@ import User from './components/User';
 import Login from './components/Login';
 import Register from './components/Register';
 import Exercises from './components/Exercises';
+import HeroBanner from './components/HeroBanner';
 
 const App = () => (
   <Box width="400px" sx={{ width: { xl: '1488px' } }} m="auto">
@@ -28,6 +29,7 @@ const App = () => (
       <Route path='/admin' element={<Admin/>}/>
       <Route path='/trainee' element={<Trainee/>}/>
       <Route path='/user' element={<User/>}/>
+      <Route path='/dashboard' element={<HeroBanner/>}/>
       <Route path='/exercise' element={<Exercises/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path="/home" element={<Home />} />
